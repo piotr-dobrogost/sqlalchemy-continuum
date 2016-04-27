@@ -7,6 +7,7 @@ except ImportError:
 import six
 import sqlalchemy as sa
 from sqlalchemy.ext.compiler import compiles
+from sqlalchemy.sql.schema import Sequence
 
 from .dialects.postgresql import (
     CreateTemporaryTransactionTableSQL,
@@ -121,6 +122,7 @@ class TransactionFactory(ModelFactory):
 
             id = sa.Column(
                 sa.types.BigInteger,
+                Sequence('transactions_id', optional=True),
                 primary_key=True,
                 autoincrement=True
             )
